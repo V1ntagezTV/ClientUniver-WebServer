@@ -1,0 +1,94 @@
+﻿@model IEnumerable<LessonModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var weekNames = new List<String>
+{
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота"
+    };
+    ViewData["Title"] = "CheckData";
+}
+<h1>Занятия</h1>
+<div>
+    <table class="table-style">
+        <tr>
+            <td class="td-style">Время</td>
+            <td class="td-style">Пара</td>
+            <td class="td-style">Кабинет</td>
+            <td class="td-style">День недели</td>
+            <td class="td-style">Недели</td>
+            <td class="td-style">Преподаватель</td>
+            <td class="td-style">Курс</td>
+            <td class="td-style">Факультет</td>
+            <td class="td-style">Проф. подготовки</td>
+        </tr>
+        @{
+            foreach (var less in Model)
+            {
+                <tr class="tr-style">
+                    <td class="td-style">
+                    @less.LessonInfo.StartTime.Hour:@less.LessonInfo.StartTime.Minute <br /> @less.LessonInfo.EndTime.Hour:@less.LessonInfo.EndTime.Minute</td>
+                    <td class="td-style">@less.LessonInfo.LessName</td>
+                    <td class="td-style">@less.LessonInfo.AuditionNum</td>
+                    <td class="td-style">@weekNames[less.LessonInfo.DayWeek]</td>
+                    <td class="td-style">@less.LessonInfo.WeekDateNumbers</td>
+                    <td class="td-style">@less.Teacher.FirstName[0]. @less.Teacher.LastName[0]. @less.Teacher.MiddleName</td>
+                    <td class="td-style">@less.Group.Cours</td>
+                    <td class="td-style">@less.Group.Faculty</td>
+                    <td class="td-style">@less.Group.TeachProfile</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+<h1>Преподы</h1>
+<div>
+    <table class="table-style">
+        <tr>
+            <td class="td-style">id</td>
+            <td class="td-style">Фамилия</td>
+            <td class="td-style">Имя</td>
+            <td class="td-style">Отчество</td>
+        </tr>
+        @{
+            foreach (var el in ViewBag.Teachers)
+            {
+                <tr>
+                    <td class="td-style">@el.TeacherId</td>
+                    <td class="td-style">@el.LastName</td>
+                    <td class="td-style">@el.FirstName</td>
+                    <td class="td-style">@el.MiddleName</td>
+                </tr>
+
+            }
+        }
+    </table>
+</div>
+<h1>Группы</h1>
+<div>
+    <table class="table-style">
+        <tr>
+            <td class="td-style">id</td>
+            <td class="td-style">Профиль</td>
+            <td class="td-style">Курс</td>
+            <td class="td-style">Факультет</td>
+        </tr>
+        @{
+            foreach (var el in ViewBag.Groups)
+            {
+                <tr>
+                    <td class="td-style">@el.GroupId</td>
+                    <td class="td-style">@el.TeachProfile</td>
+                    <td class="td-style">@el.Cours</td>
+                    <td class="td-style">@el.Faculty</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+

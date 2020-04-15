@@ -1,0 +1,38 @@
+﻿@model ServerDiplom.Models.TeacherModel
+@{
+    ViewData["Title"] = "Добавить преподавателя";
+}
+
+<div>
+    <form asp-antiforgery="true" class="form" method="post" asp-action="AddTeacher" asp-controller="Data">
+        <div>
+            <div class="validation" asp-validation-summary="ModelOnly"></div>
+
+            <div>
+                <label>
+                    Фамилия
+                </label><br />
+                <input name="LastName" type="text" />
+                <span asp-validation-for="LastName"></span>
+            </div>
+
+            <div>
+                <label>
+                    Имя
+                </label><br />
+                <input name="FirstName" type="text" />
+                <span asp-validation-for="FirstName"></span>
+            </div>
+
+            <div>
+                <label>
+                    Отчество
+                </label><br />
+                <input name="MiddleName" type="text" />
+                <span asp-validation asp-validation-for="MiddleName"></span>
+            </div>
+            <br />
+            <input type="submit" value="Сохранить!" />
+        </div>
+    </form>
+</div>

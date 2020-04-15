@@ -1,0 +1,32 @@
+﻿@model ServerDiplom.Models.GroupModel
+@{
+    ViewData["Title"] = "AddGroup";
+}
+<div>
+    <form asp-antiforgery="true" class="form" method="post" asp-action="AddGroup" asp-controller="Data">
+        <div>
+            <div class="validation" asp-validation-summary="ModelOnly"></div>
+
+            <div>
+                <label>Курс</label><br />
+                <span asp-validation-for="Cours"></span><br />
+                <input name="Cours" type="number" />
+
+            </div>
+
+            <div>
+                <label>Факультет</label><br />
+                <span asp-validation-for="Faculty"></span><br />
+                <input name="Faculty" type="text" />
+            </div>
+
+            <div>
+                <label>Имя группы</label><br />
+                <span asp-validation asp-validation-for="TeachProfile"></span><br />
+                <input name="TeachProfile" type="text" />
+            </div>
+
+            <input type="submit" value="Сохранить!" />
+        </div>
+    </form>
+</div>

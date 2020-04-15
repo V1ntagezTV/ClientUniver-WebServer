@@ -1,0 +1,109 @@
+﻿@model ServerDiplom.Models.LessonInfoModel
+@{
+    ViewData["Title"] = "AddShedule";
+}
+<form asp-antiforgery="true" class="form" method="post" asp-action="AddLesson" asp-controller="Data">
+    <table>
+        <tr>
+            <td class="td-style">Начало</td>
+            <td class="td-style">Конец</td>
+        </tr>
+
+        <tr>
+            <td class="td-style">
+                <span asp-validation-for="StartTime"></span>
+                <input class="set-width" name="StartTime" type="time" />
+            </td>
+            <td class="td-style">
+                <span asp-validation-for="EndTime"></span>
+                <input class="set-width" name="EndTime" type="time" />
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td-style">Предмет</td>
+            <td class="td-style">Кабинет</td>
+        </tr>
+
+        <tr>
+            <td class="td-style">
+                <span asp-validation-for="LessName"></span>
+                <input class="set-width" name="LessName" type="text" />
+            </td>
+            <td class="td-style">
+                <span asp-validation-for="AuditionNum"></span>
+                <input class="set-width" name="AuditionNum" type="number" />
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td-style">День</td>
+            <td class="td-style">Неделя</td>
+        </tr>
+
+        <tr>
+            <td class="td-style">
+                <span asp-validation-for="DayWeek"></span>
+                <select class="set-width" name="DayWeek">
+                    <option value="0">Понедельник</option>
+                    <option value="1">Вторник</option>
+                    <option value="2">Среда</option>
+                    <option value="3">Четверг</option>
+                    <option value="4">Пятница</option>
+                    <option value="5">Суббота</option>
+                </select>
+            </td>
+            <td class="td-style">
+                <span asp-validation-for="WeekDateNumbers"></span>
+                <input class="set-width" name="WeekDateNumbers" type="text" />
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td-style">Группа</td>
+            <td class="td-style">Преподаватель</td>
+        </tr>
+
+        <tr>
+            <td class="td-style">
+                <select class="set-width" name="groupid">
+                    <option value="0">-----</option>
+                    @{
+                        foreach (var groups in ViewBag.Groups)
+                        {
+                            <optgroup label="@groups.Key">
+                                @{
+                                    foreach (var gr in groups)
+                                    {
+                                        <option value="@gr.GroupId">@gr.TeachProfile</option>
+                                    }
+                                }
+                            </optgroup>
+                        }
+                    }
+                </select>
+            </td>
+            <td class="td-style">
+                <select class="set-width" name="teachid">
+                    @{
+                        foreach (var teacher in ViewBag.Teachers)
+                        {
+                            <option value="@teacher.TeacherId">@teacher.LastName @teacher.FirstName[0].@teacher.MiddleName[0]</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+
+    </table>
+    <input style="margin: 10px;" type="submit" value="Сохранить!" />
+</form>
+
+<!--
+        public string LessName { get; set; }
+        public int AuditionNum { get; set; }
+        public int DayWeek { get; set; }
+        public string WeekDateNumbers { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+-->
