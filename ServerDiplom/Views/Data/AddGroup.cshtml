@@ -8,22 +8,21 @@
             <div class="validation" asp-validation-summary="ModelOnly"></div>
 
             <div>
-                <label>Курс</label><br />
-                <span asp-validation-for="Cours"></span><br />
+                <label for="Cours">Курс</label><br />
                 <input name="Cours" type="number" />
-
+                <span asp-validation-for="Cours"></span>
             </div>
 
             <div>
-                <label>Факультет</label><br />
-                <span asp-validation-for="Faculty"></span><br />
+                <label for="Faculty">Факультет</label><br />
                 <input name="Faculty" type="text" />
+                <span asp-validation-for="Faculty"></span>
             </div>
 
             <div>
-                <label>Имя группы</label><br />
-                <span asp-validation asp-validation-for="TeachProfile"></span><br />
+                <label for="TeachProfile">Имя группы</label><br />
                 <input name="TeachProfile" type="text" />
+                <span asp-validation asp-validation-for="TeachProfile"></span>
             </div>
 
             <input type="submit" value="Сохранить!" />

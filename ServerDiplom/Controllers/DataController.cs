@@ -17,7 +17,7 @@ namespace ServerDiplom.Controllers
     public class DataController : Controller
     {
         private LessonsDataBase LessonsDb;
-        private IEnumerable<IGrouping<int, LessonModel>> CurrentLessons;
+
         public DataController(LessonContext context)
         {
             LessonsDb = new LessonsDataBase(context);
@@ -25,6 +25,7 @@ namespace ServerDiplom.Controllers
 
         public IActionResult Shedule(int? groupid)
         {
+            IEnumerable<IGrouping<int, LessonModel>> CurrentLessons;
             ViewBag.Groups = LessonsDb.GetGroupsGroupedByFac();
 
             if (groupid != null && groupid != 0)
@@ -42,6 +43,10 @@ namespace ServerDiplom.Controllers
             return View(LessonsDb.AllLessons);
         }
 
+        public IActionResult AddGroup()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult AddGroup(GroupModel group)
@@ -53,11 +58,6 @@ namespace ServerDiplom.Controllers
                 return View();
             }
             return View(group);
-        }
-
-        public IActionResult AddGroup()
-        {
-            return View();
         }
 
         public IActionResult AddTeacher()
@@ -76,6 +76,14 @@ namespace ServerDiplom.Controllers
             }
             return View(teacher);
         }
+
+        public IActionResult AddLesson()
+        {
+            ViewBag.Teachers = LessonsDb.data.Teachers;
+            ViewBag.Groups = LessonsDb.GetGroupsGroupedByFac();
+            return View();
+        }
+
         [HttpPost]
         public IActionResult AddLesson(LessonInfoModel info, int groupid, int teachid)
         {
@@ -95,12 +103,26 @@ namespace ServerDiplom.Controllers
             }
             return View(info);
         }
-
-        public IActionResult AddLesson()
+        [HttpPost]
+        public void DeleteGroup(int id)
         {
-            ViewBag.Teachers = LessonsDb.data.Teachers;
-            ViewBag.Groups = LessonsDb.GetGroupsGroupedByFac();
-            return View();
+            var lesson = LessonsDb.data.Groups.First(l => l.GroupId == id);
+            LessonsDb.data.Remove(lesson);
+            LessonsDb.data.SaveChanges();
+        }
+        [HttpPost]
+        public void DeleteTeacher(int id)
+        {
+            var teacher = LessonsDb.data.Teachers.First(l => l.TeacherId == id);
+            LessonsDb.data.Remove(teacher);
+            LessonsDb.data.SaveChanges();
+        }
+        [HttpPost]
+        public void DeleteLesson(int id)
+        {
+            var lesson = LessonsDb.data.Informations.First(l => l.LessonInfoId == id);
+            LessonsDb.data.Remove(lesson);
+            LessonsDb.data.SaveChanges();
         }
     }
 }
