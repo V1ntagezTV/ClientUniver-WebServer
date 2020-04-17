@@ -8,28 +8,25 @@
         <div>
             <div class="validation" asp-validation-summary="ModelOnly"></div>
 
-            <div>
-                <label>Фамилия</label>
-                <br />
-                <input name="LastName" type="text" />
+            <div class="form-group">
+                <label for="LastName">Фамилия</label><br />
+                <input class="form-control" name="LastName" type="text" />
                 <span asp-validation-for="LastName"></span>
             </div>
 
-            <div>
-                <label>Имя</label>
-                <br />
-                <input name="FirstName" type="text" />
+            <div class="form-group">
+                <label for="FirstName">Имя</label><br />
+                <input class="form-control" name="FirstName" type="text"  />
                 <span asp-validation-for="FirstName"></span>
             </div>
 
-            <div>
-                <label>Отчество</label>
-                <br />
-                <input name="MiddleName" type="text" />
-                <span asp-validation asp-validation-for="MiddleName"></span>
+            <div class="form-group">
+                <label for="MiddleName">Отчество</label><br />
+                <input class="form-control" name="MiddleName" type="text" />
+                <span asp-validation-for="MiddleName"></span>
             </div>
-            <br />
-            <input type="submit" value="Сохранить!" />
+
+            <input class="btn btn-outline-dark" type="submit" value="Сохранить!" />
         </div>
     </form>
 </div>

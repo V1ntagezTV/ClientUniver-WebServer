@@ -14,6 +14,7 @@ namespace ServerDiplom.Models.DataModels
         public DbSet<TeacherModel> Teachers { get; set; }
         public DbSet<GroupModel> Groups { get; set; }
         public DbSet<LessonInfoModel> Informations { get; set; }
+        public DbSet<UserModel> Users { get; set; }
 
         public LessonContext(DbContextOptions<LessonContext> options): base(options)
         {
@@ -24,6 +25,7 @@ namespace ServerDiplom.Models.DataModels
             modelBuilder.Entity<GroupModel>();
             modelBuilder.Entity<TeacherModel>();
             modelBuilder.Entity<LessonInfoModel>();
+            modelBuilder.Entity<UserModel>();
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -21,16 +21,10 @@
 }
 <div>
     <div>
-        <a asp-action="CheckData" asp-controller="Data">Просмотреть Базу данных</a>
-    </div>
-</div>
-
-<div>
-    <div>
         <form method="get">
-            <div id="selector-group">
-                <label>Группа</label>
-                <select name="groupid">
+            <label for="groupid">Группа</label>
+            <div class="form-group" id="selector-group">
+                <select class="set-width custom-select" name="groupid">
                     <option value="0">-----</option>
                     @{
                         foreach (var groups in ViewBag.Groups)
@@ -48,7 +42,7 @@
                 </select>
             </div>
             <div>
-                <input type="submit" value="Найти" />
+                <input class="btn btn-outline-dark" type="submit" value="Найти" />
             </div>
         </form>
     </div>

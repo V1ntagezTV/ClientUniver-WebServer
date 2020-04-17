@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -35,48 +36,66 @@ namespace ServerDiplom.Controllers
             }
             return View();
         }
-
+        [Authorize]
         public IActionResult CheckData()
         {
             ViewBag.Teachers = LessonsDb.data.Teachers;
             ViewBag.Groups = LessonsDb.data.Groups;
+            ViewBag.Informations = LessonsDb.data.Informations;
             return View(LessonsDb.AllLessons);
         }
-
+        [Authorize]
         public IActionResult AddGroup()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult AddGroup(GroupModel group)
         {
             if (ModelState.IsValid)
             {
-                LessonsDb.data.Groups.Add(group);
-                LessonsDb.data.SaveChanges();
-                return View();
+                GroupModel _ = LessonsDb.data.Groups.FirstOrDefault(g => g.TeachProfile == group.TeachProfile);
+                if (_ == null)
+                {
+                    LessonsDb.data.Groups.Add(group);
+                    LessonsDb.data.SaveChanges();
+                    return View();
+                }
+                ModelState.AddModelError("", "Группа с таким именем уже существует!");
             }
             return View(group);
         }
-
+        [Authorize]
         public IActionResult AddTeacher()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult AddTeacher(TeacherModel teacher)
         {
             if (ModelState.IsValid)
             {
-                LessonsDb.data.Teachers.Add(teacher);
-                LessonsDb.data.SaveChanges();
-                return View();
+                TeacherModel _ = LessonsDb.data.Teachers
+                    .FirstOrDefault(t =>
+                    t.FirstName == teacher.FirstName &&
+                    t.MiddleName == teacher.MiddleName &&
+                    t.LastName == teacher.LastName);
+                if (_ == null)
+                {
+                    LessonsDb.data.Teachers.Add(teacher);
+                    LessonsDb.data.SaveChanges();
+                    return View();
+                }
+                ModelState.AddModelError("", "Такой преподаватель уже существует!");
             }
             return View(teacher);
         }
 
+        [Authorize]
         public IActionResult AddLesson()
         {
             ViewBag.Teachers = LessonsDb.data.Teachers;
@@ -85,6 +104,7 @@ namespace ServerDiplom.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult AddLesson(LessonInfoModel info, int groupid, int teachid)
         {
             ViewBag.Teachers = LessonsDb.data.Teachers;
@@ -103,26 +123,44 @@ namespace ServerDiplom.Controllers
             }
             return View(info);
         }
+
         [HttpPost]
-        public void DeleteGroup(int id)
+        [Authorize]
+        public IActionResult DeleteGroup(int id)
         {
-            var lesson = LessonsDb.data.Groups.First(l => l.GroupId == id);
-            LessonsDb.data.Remove(lesson);
-            LessonsDb.data.SaveChanges();
+            var lesson = LessonsDb.data.Groups.FirstOrDefault(l => l.GroupId == id);
+            if (lesson != null)
+            {
+                LessonsDb.data.Groups.Remove(lesson);
+                LessonsDb.data.SaveChanges();
+            }
+            return RedirectToAction("CheckData", "Data");
         }
+
         [HttpPost]
-        public void DeleteTeacher(int id)
+        [Authorize]
+        public IActionResult DeleteTeacher(int id)
         {
-            var teacher = LessonsDb.data.Teachers.First(l => l.TeacherId == id);
-            LessonsDb.data.Remove(teacher);
-            LessonsDb.data.SaveChanges();
+            var teacher = LessonsDb.data.Teachers.FirstOrDefault(l => l.TeacherId == id);
+            if (teacher != null)
+            {
+                LessonsDb.data.Teachers.Remove(teacher);
+                LessonsDb.data.SaveChanges();
+            }
+            return RedirectToAction("CheckData", "Data");
         }
+
         [HttpPost]
-        public void DeleteLesson(int id)
+        [Authorize]
+        public IActionResult DeleteInformation(int id)
         {
-            var lesson = LessonsDb.data.Informations.First(l => l.LessonInfoId == id);
-            LessonsDb.data.Remove(lesson);
-            LessonsDb.data.SaveChanges();
+            var info = LessonsDb.data.Informations.FirstOrDefault(l => l.LessonInfoId == id);
+            if (info != null)
+            {
+                LessonsDb.data.Informations.Remove(info);
+                LessonsDb.data.SaveChanges();
+            }
+            return RedirectToAction("CheckData", "Data");
         }
     }
 }

@@ -2,8 +2,26 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+    <div class="text-center">
 
-    <h1 class="display-4"> Welcome </h1>
-    
-</div>
+        <h1 class="display-4"> Welcome </h1>
+        @{
+            if (!User.Identity.IsAuthenticated)
+            {
+                <p>Для управления расписание вам нужно авторизоваться</p>
+                <a class="btn btn-outline-dark" asp-controller="Account" asp-action="Login">Войти</a>
+            }
+            else if (User.Identity.Name == "Vintage")
+            {
+                <h1 class="display-4">@User.Identity.Name</h1>
+                <p>Добро пожаловать в систему управления расписанием университета СиБашГУ.</p>
+                <a class="btn btn-outline-dark" asp-controller="Account" asp-action="Register">Регистрация</a>
+                <a class="btn btn-outline-dark" asp-action="CheckData" asp-controller="Data">База Данных</a>
+            }
+            else
+            {
+                <p>@User.Identity.Name</p>
+                <p>Добро пожаловать в систему управления расписанием университета СиБашГУ.</p>
+            }
+        }
+    </div>

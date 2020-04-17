@@ -12,11 +12,11 @@
         <tr>
             <td class="td-style">
                 <span asp-validation-for="StartTime"></span>
-                <input class="set-width" name="StartTime" type="time" />
+                <input class="set-width form-control" name="StartTime" type="time" />
             </td>
             <td class="td-style">
                 <span asp-validation-for="EndTime"></span>
-                <input class="set-width" name="EndTime" type="time" />
+                <input class="set-width form-control" name="EndTime" type="time" />
             </td>
         </tr>
 
@@ -28,11 +28,11 @@
         <tr>
             <td class="td-style">
                 <span asp-validation-for="LessName"></span>
-                <input class="set-width" name="LessName" type="text" />
+                <input class="set-width form-control" name="LessName" type="text" />
             </td>
             <td class="td-style">
                 <span asp-validation-for="AuditionNum"></span>
-                <input class="set-width" name="AuditionNum" type="number" />
+                <input class="set-width form-control" name="AuditionNum" type="number" />
             </td>
         </tr>
 
@@ -44,7 +44,7 @@
         <tr>
             <td class="td-style">
                 <span asp-validation-for="DayWeek"></span>
-                <select class="set-width" name="DayWeek">
+                <select  class="set-width custom-select" name="DayWeek">
                     <option value="0">Понедельник</option>
                     <option value="1">Вторник</option>
                     <option value="2">Среда</option>
@@ -55,7 +55,7 @@
             </td>
             <td class="td-style">
                 <span asp-validation-for="WeekDateNumbers"></span>
-                <input class="set-width" name="WeekDateNumbers" type="text" />
+                <input class="set-width form-control" name="WeekDateNumbers" type="text" />
             </td>
         </tr>
 
@@ -66,7 +66,7 @@
 
         <tr>
             <td class="td-style">
-                <select class="set-width" name="groupid">
+                <select class="set-width custom-select" name="groupid">
                     <option value="0">-----</option>
                     @{
                         foreach (var groups in ViewBag.Groups)
@@ -84,7 +84,7 @@
                 </select>
             </td>
             <td class="td-style">
-                <select class="set-width" name="teachid">
+                <select class="set-width custom-select" name="teachid">
                     @{
                         foreach (var teacher in ViewBag.Teachers)
                         {
@@ -96,5 +96,6 @@
         </tr>
 
     </table>
-    <input style="margin: 10px;" type="submit" value="Сохранить!" />
+
+    <input class="btn btn-outline-dark" style="margin: 10px;" type="submit" value="Сохранить!" />
 </form>

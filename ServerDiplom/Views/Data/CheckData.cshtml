@@ -12,10 +12,11 @@
     };
     ViewData["Title"] = "CheckData";
 }
-<h1>Занятия</h1>
+<h1>Lessons</h1>
 <div>
     <table class="table-style">
         <tr>
+            <td class="td-style">id</td>
             <td class="td-style">Время</td>
             <td class="td-style">Пара</td>
             <td class="td-style">Кабинет</td>
@@ -30,8 +31,10 @@
             foreach (var less in Model)
             {
                 <tr class="tr-style">
+                    <td class="td-style">@less.LessonId</td>
                     <td class="td-style">
-                    @less.LessonInfo.StartTime.Hour:@less.LessonInfo.StartTime.Minute <br /> @less.LessonInfo.EndTime.Hour:@less.LessonInfo.EndTime.Minute</td>
+                        @less.LessonInfo.StartTime.Hour:@less.LessonInfo.StartTime.Minute <br /> @less.LessonInfo.EndTime.Hour:@less.LessonInfo.EndTime.Minute
+                    </td>
                     <td class="td-style">@less.LessonInfo.LessName</td>
                     <td class="td-style">@less.LessonInfo.AuditionNum</td>
                     <td class="td-style">@weekNames[less.LessonInfo.DayWeek]</td>
@@ -45,7 +48,7 @@
         }
     </table>
 </div>
-<h1>Преподы</h1>
+<h1>Teachers</h1>
 <div>
     <table class="table-style">
         <tr>
@@ -68,7 +71,7 @@
         }
     </table>
 </div>
-<h1>Группы</h1>
+<h1>Groups</h1>
 <div>
     <table class="table-style">
         <tr>
@@ -90,5 +93,90 @@
         }
     </table>
 </div>
+<h1>Informations</h1>
+<div>
+    <table class="table-style">
+        <tr>
+            <td class="td-style">id</td>
+            <td class="td-style">Предмет</td>
+            <td class="td-style">Кабинет</td>
+            <td class="td-style">День</td>
+            <td class="td-style">Недели</td>
+            <td class="td-style">Начало</td>
+            <td class="td-style">Конец</td>
+        </tr>
+        @{
+            foreach (var el in ViewBag.Informations as IEnumerable<LessonInfoModel>)
+            {
+                <tr>
+                    <td class="td-style">@el.LessonInfoId</td>
+                    <td class="td-style">@el.LessName</td>
+                    <td class="td-style">@el.AuditionNum</td>
+                    <td class="td-style">@el.DayWeek</td>
+                    <td class="td-style">@el.WeekDateNumbers</td>
+                    <td class="td-style">@el.StartTime.Hour:@el.StartTime.Minute</td>
+                    <td class="td-style">@el.EndTime.Hour:@el.StartTime.Minute</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
 
 
+<div class="form" style="margin-bottom: 10px;">
+    <h4>Удалить группу</h4>
+    <div>
+        <form method="post" asp-action="DeleteGroup" asp-controller="Data">
+            <select class="set-width custom-select" name="id">
+                @{
+                    foreach (var group in ViewBag.Groups as IEnumerable<GroupModel>)
+                    {
+                        <option value="@group.GroupId">
+                            @group.GroupId @group.Cours @group.Faculty @group.TeachProfile
+                        </option>
+                    }
+                }
+            </select>
+            <input class="btn btn-outline-dark" type="submit" value="Удалить!" />
+        </form>
+    </div>
+</div>
+
+
+<div class="form" style="margin-bottom: 10px;">
+    <h4>Удалить преподавателя</h4>
+    <div>
+        <form method="post" asp-action="DeleteTeacher" asp-controller="Data">
+            <select class="set-width custom-select" name="id">
+                @{
+                    foreach (var teacher in ViewBag.Teachers as IEnumerable<TeacherModel>)
+                    {
+                        <option value="@teacher.TeacherId">
+                            @teacher.TeacherId @teacher.LastName @teacher.FirstName @teacher.MiddleName
+                        </option>
+                    }
+                }
+            </select>
+            <input class="btn btn-outline-dark" type="submit" value="Удалить!" />
+        </form>
+    </div>
+</div>
+
+<div class="form" style="margin-bottom: 10px;">
+    <h4>Удалить информацию о предмете</h4>
+    <div>
+        <form method="post" asp-action="DeleteInformation" asp-controller="Data">
+            <select class="set-width custom-select" name="id">
+                @{
+                    foreach (var lessInfo in ViewBag.Informations as IEnumerable<LessonInfoModel>)
+                    {
+                        <option value="@lessInfo.LessonInfoId">
+                            @lessInfo.LessonInfoId @lessInfo.LessName @lessInfo.AuditionNum @lessInfo.DayWeek
+                        </option>
+                    }
+                }
+            </select>
+            <input class="btn btn-outline-dark" type="submit" value="Удалить!" />
+        </form>
+    </div>
+</div>
