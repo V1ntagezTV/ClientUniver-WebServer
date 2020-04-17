@@ -10,43 +10,35 @@
         "Суббота"
     };
     ViewData["Title"] = "Расписание";
-    var faculties = new List<String>
-    {
-        "Технологический",
-        "Педагогический",
-        "Юридический",
-        "Естественно-математический",
-        "Экономики и права"
-    };
 }
-<div>
     <div>
-        <form method="get">
-            <label for="groupid">Группа</label>
-            <div class="form-group" id="selector-group">
-                <select class="set-width custom-select" name="groupid">
-                    <option value="0">-----</option>
-                    @{
+        <div>
+            <form asp-action="Shedule" asp-controller="Data">
+                <label for="groupid">Группа</label>
+                <div class="form-group" id="selector-group">
+                    <select class="set-width custom-select" name="groupid">
+                        <option value="0">-----</option>
+                        @{
                         foreach (var groups in ViewBag.Groups)
                         {
                             <optgroup label="@groups.Key">
                                 @{
                                     foreach (var gr in groups)
                                     {
-                                        <option value="@gr.GroupId">@gr.TeachProfile</option>
+                                    <option value="@gr.GroupId">@gr.TeachProfile</option>
                                     }
                                 }
                             </optgroup>
                         }
-                    }
-                </select>
-            </div>
-            <div>
-                <input class="btn btn-outline-dark" type="submit" value="Найти" />
-            </div>
-        </form>
+                        }
+                    </select>
+                </div>
+                <div>
+                    <input class="btn btn-outline-dark" type="submit" value="Найти" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 <div>
     @{
         if (Model != null)

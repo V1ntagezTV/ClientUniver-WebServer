@@ -20,7 +20,7 @@ namespace ServerDiplom.Models.DataModels
                 .Include(l => l.LessonInfo);
         }
 
-        public IEnumerable<IGrouping<int, LessonModel>> GetWeekSortedLessonsById(int groupId)
+        public IEnumerable<IGrouping<int, LessonModel>> GetWeekSortedLessonsByIdGroup(int groupId)
         {
             return AllLessons
                         .Where(l => l.Group.GroupId == groupId)
@@ -32,6 +32,13 @@ namespace ServerDiplom.Models.DataModels
             return data.Groups
                     .ToArray()
                     .GroupBy(l => l.Faculty);
+        }
+
+        public IEnumerable<IGrouping<int, LessonModel>> GetWeekSortedLessonsByIdTeacher(int teacherid)
+        {
+            return AllLessons
+                .Where(l => l.TeacherId == teacherid)
+                .GroupBy(l => l.LessonInfo.DayWeek);
         }
     }
 }

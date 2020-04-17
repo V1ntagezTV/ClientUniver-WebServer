@@ -1,0 +1,81 @@
+﻿@model IEnumerable<IGrouping<int, LessonModel>>
+@{
+    ViewData["Title"] = "SheduleTeacher";
+    var weekNames = new List<String>
+    {
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота"
+    };
+}
+
+<div>
+    <div>
+        <form asp-action="SheduleTeacher" asp-controller="Data">
+            <label for="teacherid">Преподаватель</label>
+            <div class="form-group" id="selector-group">
+                <select id="teacherid" class="set-width custom-select" name="teacherid">
+                    <option value="0">-----</option>
+                    @{
+                        foreach (var teacher in ViewBag.Teachers as IEnumerable<TeacherModel>)
+                        {
+                            <option value="@teacher.TeacherId">@teacher.LastName @teacher.FirstName @teacher.MiddleName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div>
+                <input class="btn btn-outline-dark" type="submit" value="Найти" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @{
+        if (Model != null)
+        {
+            foreach (IGrouping<int, LessonModel> day in Model)
+            {
+                <div class="shadow">
+                    <h2>@weekNames[day.Key]</h2>
+                    <hr class="hr-style" />
+                    <table class="table-style">
+                        <tr>
+                            <td class="td-style">Время</td>
+                            <td class="td-style">Пара</td>
+                            <td class="td-style">Кабинет</td>
+                            <td class="td-style">День недели</td>
+                            <td class="td-style">Недели</td>
+                            <td class="td-style">Преподаватель</td>
+                            <td class="td-style">Курс</td>
+                            <td class="td-style">Факультет</td>
+                            <td class="td-style">Проф. подготовки</td>
+                        </tr>
+                        @{
+                            foreach (LessonModel less in day)
+                            {
+                                <tr>
+                                    <td class="td-style">
+                                        @less.LessonInfo.StartTime.Hour:@less.LessonInfo.StartTime.Minute <br /> @less.LessonInfo.EndTime.Hour:@less.LessonInfo.EndTime.Minute
+                                    </td>
+                                    <td class="td-style">@less.LessonInfo.LessName</td>
+                                    <td class="td-style">@less.LessonInfo.AuditionNum</td>
+                                    <td class="td-style">@weekNames[less.LessonInfo.DayWeek]</td>
+                                    <td class="td-style">@less.LessonInfo.WeekDateNumbers</td>
+                                    <td class="td-style">@less.Teacher.LastName @less.Teacher.FirstName[0]. @less.Teacher.MiddleName[0]</td>
+                                    <td class="td-style">@less.Group.Cours</td>
+                                    <td class="td-style">@less.Group.Faculty</td>
+                                    <td class="td-style">@less.Group.TeachProfile</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                </div>
+            }
+        }
+    }
+</div>

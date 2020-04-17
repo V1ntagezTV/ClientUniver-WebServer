@@ -31,11 +31,25 @@ namespace ServerDiplom.Controllers
 
             if (groupid != null && groupid != 0)
             {
-                CurrentLessons = LessonsDb.GetWeekSortedLessonsById((int)groupid);
+                CurrentLessons = LessonsDb.GetWeekSortedLessonsByIdGroup((int)groupid);
                 return View(CurrentLessons);
             }
             return View();
         }
+
+        public IActionResult SheduleTeacher(int? teacherid)
+        {
+            IEnumerable<IGrouping<int, LessonModel>> lessons;
+            ViewBag.Teachers = LessonsDb.data.Teachers as IEnumerable<TeacherModel>;
+            
+            if (teacherid != null && teacherid != 0)
+            {
+                lessons = LessonsDb.GetWeekSortedLessonsByIdTeacher((int)teacherid);
+                return View(lessons);
+            }
+            return View();
+        }
+
         [Authorize]
         public IActionResult CheckData()
         {
