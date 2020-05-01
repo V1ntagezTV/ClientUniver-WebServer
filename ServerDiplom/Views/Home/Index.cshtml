@@ -17,7 +17,21 @@
                 <p>Добро пожаловать в систему управления расписанием университета СиБашГУ.</p>
                 <a class="btn btn-outline-dark" asp-controller="Account" asp-action="Register">Регистрация</a>
                 <a class="btn btn-outline-dark" asp-action="CheckData" asp-controller="Data">База Данных</a>
-            }
+                <h1 class="display-4">Commands</h1>
+
+                <h4>Data/GetAllGroups</h4>
+                <p>Возвращает в формате json список групп</p>
+                <p>Пример: Data/GetAllGroups?id=1</p>
+
+                <h4>Data/GetAllTeachers</h4>
+                <p>Возвращает в формате json список преподавателей</p>
+                <p>Пример: Data/GetAllTeachers?id=1&type=teacher</p>
+
+                <h4>GetSheduleById(int id, string type)</h4>
+                <p>Возвращает в формате Json расписание для преподавателей и студентов</p>
+                <p>Types: student, teacher</p>
+                <p>Пример: Data/GetSheduleById?id=1&type=teacher</p>
+            } 
             else
             {
                 <p>@User.Identity.Name</p>

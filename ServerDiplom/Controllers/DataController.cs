@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using ServerDiplom.Models;
 using ServerDiplom.Models.DataModels;
@@ -175,6 +170,39 @@ namespace ServerDiplom.Controllers
                 LessonsDb.data.SaveChanges();
             }
             return RedirectToAction("CheckData", "Data");
+        }
+
+        [HttpGet]
+        public string GetSheduleById(int id, string type)
+        {
+            IEnumerable<IGrouping<int, LessonModel>> result;
+
+            switch (type)
+            {
+                case ("teacher"):
+                    result = LessonsDb.GetWeekSortedLessonsByIdTeacher(id);
+                    break;
+                case ("student"):
+                    result = LessonsDb.GetWeekSortedLessonsByIdGroup(id);
+                    break;
+
+                default:
+                    return "not found";
+            }
+            return JsonConvert.SerializeObject(result);
+
+        }
+
+        [HttpGet]
+        public string GetAllGroups()
+        {
+            return JsonConvert.SerializeObject(LessonsDb.data.Groups);
+        }
+
+        [HttpGet]
+        public string GetAllTeachers()
+        {
+            return JsonConvert.SerializeObject(LessonsDb.data.Teachers);
         }
     }
 }

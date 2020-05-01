@@ -23,8 +23,10 @@ namespace ServerDiplom.Models.DataModels
         public IEnumerable<IGrouping<int, LessonModel>> GetWeekSortedLessonsByIdGroup(int groupId)
         {
             return AllLessons
-                        .Where(l => l.Group.GroupId == groupId)
-                        .GroupBy(l => l.LessonInfo.DayWeek);
+                    .Where(l => l.Group.GroupId == groupId)
+                    .OrderBy(l => l.LessonInfo.DayWeek)
+                    .ThenBy(l => l.LessonInfo.StartTime)
+                    .GroupBy(l => l.LessonInfo.DayWeek);
         }
 
         public IEnumerable<IGrouping<string, GroupModel>> GetGroupsGroupedByFac()
@@ -37,8 +39,10 @@ namespace ServerDiplom.Models.DataModels
         public IEnumerable<IGrouping<int, LessonModel>> GetWeekSortedLessonsByIdTeacher(int teacherid)
         {
             return AllLessons
-                .Where(l => l.TeacherId == teacherid)
-                .GroupBy(l => l.LessonInfo.DayWeek);
+                    .Where(l => l.TeacherId == teacherid)
+                    .OrderBy(l => l.LessonInfo.DayWeek)
+                    .ThenBy(l => l.LessonInfo.StartTime)
+                    .GroupBy(l => l.LessonInfo.DayWeek);
         }
     }
 }
