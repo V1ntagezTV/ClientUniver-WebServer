@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css" /><link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -27,18 +27,24 @@
                         @{
                             if (User.Identity.IsAuthenticated)
                             {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Data" asp-action="AddLesson">Добавить расписание</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Data" asp-action="AddTeacher">Добавить преподавателя</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Data" asp-action="AddGroup">Добавить Группу</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Выйти</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Data" asp-action="AddLesson">Добавить расписание</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Data" asp-action="AddTeacher">Добавить преподавателя</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Data" asp-action="AddGroup">Добавить Группу</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Выйти</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-dark" asp-controller="Account" asp-action="Login">Войти</a>
+                                </li>
                             }
                         }
                     </ul>

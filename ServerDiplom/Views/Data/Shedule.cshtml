@@ -23,9 +23,9 @@
                         {
                             <optgroup label="@groups.Key">
                                 @{
-                                    foreach (var gr in groups)
+                                    foreach (GroupModel gr in groups)
                                     {
-                                    <option value="@gr.GroupId">@gr.TeachProfile</option>
+                                        <option value="@gr.GroupId">@gr.Cours @gr.TeachProfile</option>
                                     }
                                 }
                             </optgroup>
@@ -56,9 +56,7 @@
                     <td class="td-style">День недели</td>
                     <td class="td-style">Недели</td>
                     <td class="td-style">Преподаватель</td>
-                    <td class="td-style">Курс</td>
-                    <td class="td-style">Факультет</td>
-                    <td class="td-style">Проф. подготовки</td>
+
                 </tr>
                 @{
                     foreach (LessonModel less in day)
@@ -72,9 +70,6 @@
                             <td class="td-style">@weekNames[less.LessonInfo.DayWeek]</td>
                             <td class="td-style">@less.LessonInfo.WeekDateNumbers</td>
                             <td class="td-style">@less.Teacher.LastName @less.Teacher.FirstName[0]. @less.Teacher.MiddleName[0]</td>
-                            <td class="td-style">@less.Group.Cours</td>
-                            <td class="td-style">@less.Group.Faculty</td>
-                            <td class="td-style">@less.Group.TeachProfile</td>
                         </tr>
                     }
                 }

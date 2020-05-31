@@ -87,11 +87,17 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    background: #f8f8f8;
+    margin-bottom: 60px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    color: #444;
 }
 
 .footer {
+  background: #fff;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -109,4 +115,37 @@ body {
     font-size: 1.5rem;
     font-weight: 300;
     line-height: 1.2;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.align-items-center {
+}
+
+.box_about {
+    background: #fff;
+    padding: 45px 45px 30px 45px;
+    text-align: left;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.lead {
+    font-size: 24px;
+    font-size: 1.5rem;
+    color: #637381;
+}
+
+.p_lead {
+    font-size: 16px;
+    color: #637381;
 }

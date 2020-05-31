@@ -4,19 +4,50 @@
 
     <div class="text-center">
 
-        <h1 class="display-4"> Welcome </h1>
+        <h2 style="color: #111; margin-top: 40px; margin-bottom: 40px"> Мобильное приложение MySibgu университета СиБашГУ</h2>
         @{
             if (!User.Identity.IsAuthenticated)
             {
-                <p>Для управления расписание вам нужно авторизоваться</p>
-                <a class="btn btn-outline-dark" asp-controller="Account" asp-action="Login">Войти</a>
+                <div class="row justify-content-center align-items-center">
+                    <div class="box_about col-lg-5" style="background: #ffffff; padding: 45px 45px 30px 45px;">
+                        <h2 style="color: #111;">Приложение</h2>
+                        <p class="lead">Описание</p>
+                        <p class="p_lead" style="margin-bottom: 0px;">Операционная система: Android</p>
+                        <p class="p_lead" style="margin-bottom: 0px;">Последнее обновление: 31.05.2020</p>
+                        <p class="p_lead">Разработал: <a href="https://vk.com/youvintage">Кунафин Инсур</a></p>
+                        <form method="get" asp-controller="Data" asp-action="DownloadFile">
+                            <p class="p_lead">Скачать мобильное приложение MySibgu</p>
+                            <button class="btn btn-outline-dark" type="submit">Скачать</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-5 pl-lg-5 text-center d-none d-lg-block">
+                        <img class="img-fluid" src="~/images/Group.png" width="312" height="268" />
+                    </div>
+                </div>
+                <!--Description block-->
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-lg-5 pl-lg-5 text-center d-none d-lg-block">
+                        <img class="img-fluid" src="~/images/Group.png" width="312" height="268" />
+                    </div>
+                    <div class="box_about col-lg-5" style="background: #ffffff; padding: 45px 45px 30px 45px;">
+                        <h2 style="color: #111;">MySibsu</h2>
+                            <p class="lead">Описание</p>
+                            <p class="p_lead">
+                            Per eu nostrud feugiat. Et quo molestiae persecuti neglegentur. At zril definitionem mei, vel ei choro volumus. An tota nulla soluta has, ei nec essent audiam, te nisl dignissim vel. Ex velit audire perfecto pro, ei mei doming vivendo legendos. Cu sit magna zril, an odio delectus constituto vis. Vis ludus omnesque ne, est veri quaeque ad.
+                            </p>
+                    </div>
+                </div>
             }
             else if (User.Identity.Name == "Vintage")
             {
                 <h1 class="display-4">@User.Identity.Name</h1>
                 <p>Добро пожаловать в систему управления расписанием университета СиБашГУ.</p>
                 <a class="btn btn-outline-dark" asp-controller="Account" asp-action="Register">Регистрация</a>
-                <a class="btn btn-outline-dark" asp-action="CheckData" asp-controller="Data">База Данных</a>
+                <a class="btn btn-outline-dark" asp-action="CheckData" asp-controller="Data">База Данных</a><br />
+                <form method="get" asp-controller="Data" asp-action="DownloadFile">
+                    <br />
+                    <button class="btn btn-outline-dark" type="submit">Скачать</button>
+                </form>
                 <h1 class="display-4">Commands</h1>
 
                 <h4>Data/GetAllGroups</h4>
@@ -31,7 +62,7 @@
                 <p>Возвращает в формате Json расписание для преподавателей и студентов</p>
                 <p>Types: student, teacher</p>
                 <p>Пример: Data/GetSheduleById?id=1&type=teacher</p>
-            } 
+            }
             else
             {
                 <p>@User.Identity.Name</p>

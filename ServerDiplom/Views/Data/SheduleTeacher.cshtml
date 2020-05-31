@@ -43,7 +43,7 @@
                 <div class="shadow">
                     <h2>@weekNames[day.Key]</h2>
                     <hr class="hr-style" />
-                    <table class="table-style">
+                    <table class="table-style" >
                         <tr>
                             <td class="td-style">Время</td>
                             <td class="td-style">Пара</td>
@@ -51,9 +51,7 @@
                             <td class="td-style">День недели</td>
                             <td class="td-style">Недели</td>
                             <td class="td-style">Преподаватель</td>
-                            <td class="td-style">Курс</td>
-                            <td class="td-style">Факультет</td>
-                            <td class="td-style">Проф. подготовки</td>
+                            <td class="td-style">Группа</td>
                         </tr>
                         @{
                             foreach (LessonModel less in day)
@@ -67,9 +65,7 @@
                                     <td class="td-style">@weekNames[less.LessonInfo.DayWeek]</td>
                                     <td class="td-style">@less.LessonInfo.WeekDateNumbers</td>
                                     <td class="td-style">@less.Teacher.LastName @less.Teacher.FirstName[0]. @less.Teacher.MiddleName[0]</td>
-                                    <td class="td-style">@less.Group.Cours</td>
-                                    <td class="td-style">@less.Group.Faculty</td>
-                                    <td class="td-style">@less.Group.TeachProfile</td>
+                                    <td class="td-style">@less.Group.Cours @less.Group.TeachProfile</td>
                                 </tr>
                             }
                         }

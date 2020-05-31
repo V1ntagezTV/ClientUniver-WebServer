@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json;
 using ServerDiplom.Models;
 using ServerDiplom.Models.DataModels;
@@ -203,6 +204,15 @@ namespace ServerDiplom.Controllers
         public string GetAllTeachers()
         {
             return JsonConvert.SerializeObject(LessonsDb.data.Teachers);
+        }
+
+        public FileResult DownloadFile()
+        {
+            IFileProvider provider = new PhysicalFileProvider("C:/inetpub/vhosts/u1018142.plsk.regruhosting.ru/httpdocs/mysibsu.ru/wwwroot/Files");
+            IFileInfo fileInfo = provider.GetFileInfo("MySibgu.apk");
+            var readStream = fileInfo.CreateReadStream();
+            var mimeType = "application/vnd.android.package-archive";
+            return File(readStream, mimeType, "MySibgu.apk");
         }
     }
 }
