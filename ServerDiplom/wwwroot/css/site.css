@@ -97,12 +97,12 @@ body {
 }
 
 .footer {
-  background: #fff;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    background: #172134;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 .display-low{
@@ -148,4 +148,17 @@ body {
 .p_lead {
     font-size: 16px;
     color: #637381;
+}
+.right {
+    margin-left: auto;
+    margin-right: 0;
+}
+.main_title {
+    margin-top: 40px;
+    margin-bottom: 35px;
+}
+.main_title p {
+    font-size: 23px;
+    font-size: 1.4375rem;
+    font-weight: 300;
 }

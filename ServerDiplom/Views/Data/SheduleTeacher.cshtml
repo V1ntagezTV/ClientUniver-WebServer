@@ -58,7 +58,8 @@
                             {
                                 <tr>
                                     <td class="td-style">
-                                        @less.LessonInfo.StartTime.Hour:@less.LessonInfo.StartTime.Minute <br /> @less.LessonInfo.EndTime.Hour:@less.LessonInfo.EndTime.Minute
+                                        @less.LessonInfo.StartTime.ToString("HH:mm")<br />
+                                        @less.LessonInfo.EndTime.ToString("HH:mm")
                                     </td>
                                     <td class="td-style">@less.LessonInfo.LessName</td>
                                     <td class="td-style">@less.LessonInfo.AuditionNum</td>

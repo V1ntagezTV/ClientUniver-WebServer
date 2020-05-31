@@ -1,22 +1,26 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Главная";
 }
 
     <div class="text-center">
-
-        <h2 style="color: #111; margin-top: 40px; margin-bottom: 40px"> Мобильное приложение MySibgu университета СиБашГУ</h2>
+        <div class="main_title">
+            <h2 style="color: #111;"> Мобильное-приложение «MySibgu»</h2>
+            <p>Сибайский институт Башкирского государственного университета</p>
+        </div>
         @{
             if (!User.Identity.IsAuthenticated)
             {
+                <!--about Application-->
                 <div class="row justify-content-center align-items-center">
                     <div class="box_about col-lg-5" style="background: #ffffff; padding: 45px 45px 30px 45px;">
                         <h2 style="color: #111;">Приложение</h2>
                         <p class="lead">Описание</p>
+                        <p class="p_lead" style="margin-bottom: 0px;">Версия: v1.01</p>
                         <p class="p_lead" style="margin-bottom: 0px;">Операционная система: Android</p>
                         <p class="p_lead" style="margin-bottom: 0px;">Последнее обновление: 31.05.2020</p>
                         <p class="p_lead">Разработал: <a href="https://vk.com/youvintage">Кунафин Инсур</a></p>
                         <form method="get" asp-controller="Data" asp-action="DownloadFile">
-                            <p class="p_lead">Скачать мобильное приложение MySibgu</p>
+                            <p class="p_lead">Скачать приложение MySibgu</p>
                             <button class="btn btn-outline-dark" type="submit">Скачать</button>
                         </form>
                     </div>
@@ -24,16 +28,16 @@
                         <img class="img-fluid" src="~/images/Group.png" width="312" height="268" />
                     </div>
                 </div>
-                <!--Description block-->
+                <!--about University-->
                 <div class="row justify-content-center align-items-center">
                     <div class="col-lg-5 pl-lg-5 text-center d-none d-lg-block">
-                        <img class="img-fluid" src="~/images/Group.png" width="312" height="268" />
+                        <img class="img-fluid" src="~/images/aboutUnivScreen.jpg" width="312" height="268" />
                     </div>
                     <div class="box_about col-lg-5" style="background: #ffffff; padding: 45px 45px 30px 45px;">
-                        <h2 style="color: #111;">MySibsu</h2>
+                        <h2 style="color: #111;">СиБашГУ</h2>
                             <p class="lead">Описание</p>
                             <p class="p_lead">
-                            Per eu nostrud feugiat. Et quo molestiae persecuti neglegentur. At zril definitionem mei, vel ei choro volumus. An tota nulla soluta has, ei nec essent audiam, te nisl dignissim vel. Ex velit audire perfecto pro, ei mei doming vivendo legendos. Cu sit magna zril, an odio delectus constituto vis. Vis ludus omnesque ne, est veri quaeque ad.
+                                Сибайский институт Башкирского государственного университета — крупный образовательный и научный центр башкирского Зауралья. Институт был основан в 1998 году. Создан приказом МО РФ путём объединения существовавших в городе с 1990 г. и 1993 г. филиалов БГПИ и БГУ. Сегодня в институте действуют 4 факультета.
                             </p>
                     </div>
                 </div>
